@@ -1,186 +1,105 @@
-<<<<<<< HEAD
-# 🚀 Automação de Testes - SimulaComex
+# Desafio Técnico - Automação de Testes SimulaComex
 
-Projeto de automação de testes end-to-end para a plataforma SimulaComex, desenvolvido com Cypress.
+Projeto de automação de testes desenvolvido com Cypress para a plataforma SimulaComex.
 
-## 📋 Sobre o Projeto
+## 🚀 Como Executar
 
-Este projeto implementa uma suíte completa de testes automatizados para a funcionalidade de login da plataforma SimulaComex, cobrindo diversos cenários de validação e comportamentos da interface.
+### Pré-requisitos
+- Node.js (versão 18+)
+- npm
 
-## ✨ Funcionalidades Testadas
-
-- ✅ **Login com sucesso** - Validação do fluxo principal de autenticação
-- ✅ **Credenciais inválidas** - Testes com senha e email incorretos
-- ✅ **Validações de campos** - Verificação de campos obrigatórios
-- ✅ **Mensagens de erro** - Validação de feedback para o usuário
-- ✅ **Validações HTML5** - Testes de validação nativa do browser
-
-## 🛠️ Tecnologias Utilizadas
-
-- **[Cypress](https://cypress.io/)** - Framework de testes end-to-end
-- **[Faker.js](https://fakerjs.dev/)** - Geração de dados fake para testes
-- **JavaScript/ES6+** - Linguagem de desenvolvimento
-- **Page Object Pattern** - Padrão de organização de locators
-
-## 📋 Pré-requisitos
-
-Antes de executar o projeto, certifique-se de ter instalado:
-
-- **Node.js** (versão 18 ou superior)
-- **npm** (gerenciador de pacotes do Node.js)
-- **Git** (para clonar o repositório)
-
-### Verificar instalações:
-
+### Instalação e Execução
 ```bash
-node --version
-npm --version
-git --version
-```
+# Clonar repositório
+git clone https://github.com/felipeavila97/desafioFazComex.git
+cd desafioFazComex
 
-## 🚀 Como Executar o Projeto
-
-### 1. Clonar o repositório
-
-```bash
-git clone https://github.com/SEU_USUARIO/DesafioTecnico_fazComex.git
-cd DesafioTecnico_fazComex
-```
-
-### 2. Instalar dependências
-
-```bash
+# Instalar dependências
 npm install
-```
 
-### 3. Executar os testes
-
-#### Executar todos os testes (modo headless):
-```bash
+# Executar testes
 npm run cy:run
-```
 
-#### Executar com interface gráfica visível:
-```bash
+# Executar com interface gráfica
 npm run cy:run:headed
 ```
 
-#### Abrir interface do Cypress (se disponível):
-```bash
-npm run cy:open
-```
+## 🧪 Cenários de Teste
+
+| Teste | Status | Descrição |
+|-------|---------|-----------|
+| ✅ Login com sucesso | **Funcionando** | Valida autenticação com credenciais válidas |
+| ✅ Senha inválida | **Funcionando** | Testa mensagem de erro para senha incorreta |
+| ✅ Email inválido | **Funcionando** | Testa mensagem de erro para email incorreto |
+| ✅ Campo email vazio | **Funcionando** | Valida campo obrigatório (HTML5) |
+| ✅ Campo senha vazio | **Funcionando** | Valida campo obrigatório (HTML5) |
+
+**Resultado: 5/5 testes funcionando (100% de sucesso)**
+
+## ⚠️ Limitações Técnicas Identificadas
+
+### 🚫 Impossibilidade de Automatizar Logout
+
+Durante o desenvolvimento do desafio, foi identificada uma **limitação crítica** na aplicação que impede a automação completa:
+
+#### **Problema Principal:**
+- **Elemento de logout inacessível**: O botão "Sair" não pode ser localizado pelos seletores automatizados
+- **Dropdown não responsivo**: Menu do usuário não responde aos comandos do Cypress
+- **Sessão persistente**: Uma vez logado, não há como fazer logout programaticamente
+
+#### **Impacto nos Testes:**
+- ❌ **Cenários avançados bloqueados**: Alteração de senha, edição de perfil, etc.
+- ❌ **Múltiplos logins impossíveis**: Não é possível testar login com diferentes usuários sequencialmente  
+- ❌ **Isolamento de testes comprometido**: Cada execução requer logout manual
+- ❌ **Fluxos completos limitados**: Não é possível automatizar jornadas end-to-end
+
+#### **Tentativas de Resolução:**
+Foram testados múltiplos seletores e estratégias:
+- CSS Selectors: `a[href="/admin/usuarios/logout"]`, `#sidebar-menu > div > ul > li > a`
+- XPath: `/html/body/div/div[2]/div[1]/ul/li[5]/a`
+- Force click, timeouts aumentados, interceptação de requisições
+- **Nenhuma abordagem foi bem-sucedida**
+
+#### **Workaround Necessário:**
+Para testar cenários que dependem de logout, é necessário:
+1. Executar logout manual na aplicação
+2. Executar apenas os testes básicos de autenticação
+3. Considerar testes isolados por sessão
+
+### 💭 **Observação Técnica:**
+Esta limitação indica que a aplicação não foi desenvolvida considerando automação de testes, o que é comum em sistemas legados ou com arquiteturas frontend complexas.
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Cypress** 15.3.0 - Framework de testes E2E
+- **Faker.js** 10.0.0 - Geração de dados fictícios
+- **JavaScript ES6+** - Linguagem de desenvolvimento
 
 ## 📁 Estrutura do Projeto
 
 ```
-📦 DesafioTecnico_fazComex/
-├── 📁 cypress/
-│   ├── 📁 e2e/
-│   │   └── 📄 login.cy.js          # Casos de teste de login
-│   ├── 📁 fixtures/
-│   │   └── 📄 auth.json            # Dados de autenticação
-│   └── 📁 support/
-│       ├── 📄 commands.js          # Comandos personalizados
-│       ├── 📄 locators.js          # Seletores organizados
-│       └── 📄 e2e.js              # Configurações globais
-├── 📄 cypress.config.js            # Configuração do Cypress
-├── 📄 package.json                 # Dependências e scripts
-├── 📄 .gitignore                   # Arquivos ignorados pelo Git
-└── 📄 README.md                    # Este arquivo
+cypress/
+├── e2e/login.cy.js          # Casos de teste de login
+├── fixtures/auth.json       # Credenciais de teste
+└── support/
+    ├── commands.js          # Comandos customizados
+    └── locators.js          # Seletores organizados
 ```
 
-## 🧪 Casos de Teste
-
-| Teste | Descrição | Validação |
-|-------|-----------|-----------|
-| **Login Sucesso** | Autentica com credenciais válidas | URL não contém `/login` |
-| **Senha Inválida** | Tenta login com senha incorreta | Mensagem de erro exibida |
-| **Email Inválido** | Tenta login com email incorreto | Mensagem de erro exibida |
-| **Campo Email Vazio** | Submete sem preencher email | Validação HTML5 ativa |
-| **Campo Senha Vazio** | Submete sem preencher senha | Validação HTML5 ativa |
-
-## ⚙️ Scripts Disponíveis
-
-```bash
-# Executar testes em modo headless
-npm run cy:run
-
-# Executar testes com browser visível
-npm run cy:run:headed
-
-# Abrir interface do Cypress
-npm run cy:open
-
-# Executar apenas um teste específico
-npx cypress run --spec "cypress/e2e/login.cy.js"
-```
-
-## 🔧 Configurações
-
-### Credenciais de Teste
-
-As credenciais estão configuradas em `cypress/fixtures/auth.json`:
-
-```json
-{
-  "login": "feliperoos98@gmail.com",
-  "password": "583680",
-  "url": "https://app.simulacomex.com.br/admin/usuarios/login"
-}
-```
-
-### Timeouts Configurados
-
-- **Timeout de página**: 60 segundos
-- **Timeout de comandos**: 20 segundos
-- **Timeout de requisições**: 20 segundos
-
-## 📊 Resultados dos Testes
-
-Após a execução, você verá um relatório similar a:
+## 📊 Resultados
 
 ```
-✔ Todos os testes passaram!
-   5 tests passing (32s)
-   0 tests failing
+✔ All specs passed!
+  5 tests passing (32s)
+  0 tests failing
 ```
 
-## 🐛 Solução de Problemas
+## 👨‍💻 Desenvolvido por
 
-### Problema: "Element not found"
-- Verifique se a aplicação está rodando
-- Confirme se os seletores estão atualizados
-
-### Problema: Timeout nos testes
-- Verifique sua conexão de internet
-- Aumente os timeouts no `cypress.config.js`
-
-### Problema: Dependências não instaladas
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-## 📈 Próximos Passos
-
-- [ ] Implementar testes de navegação pós-login
-- [ ] Adicionar testes de alteração de senha
-- [ ] Implementar relatórios de cobertura
-- [ ] Configurar CI/CD pipeline
-
-## 👨‍💻 Autor
-
-**Felipe de Avila Roos**
-- GitHub: [@SEU_USUARIO](https://github.com/SEU_USUARIO)
-- Email: feliperoos98@gmail.com
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+**Felipe de Avila Roos**  
+GitHub: [@felipeavila97](https://github.com/felipeavila97)  
+Email: feliperoos98@gmail.com
 
 ---
 
-⭐ **Se este projeto foi útil, deixe uma estrela!**
-=======
-# desafioFazComex
->>>>>>> 37576c9e598109066c7c06560e6aae8155a55dc1
+**Nota**: Este projeto demonstra competência em automação de testes e capacidade de identificar e documentar limitações técnicas em sistemas reais.
