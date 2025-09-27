@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Automação de Testes - SimulaComex
 
 Projeto de automação de testes end-to-end para a plataforma SimulaComex, desenvolvido com Cypress.
@@ -180,3 +181,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ---
 
 ⭐ **Se este projeto foi útil, deixe uma estrela!**
+=======
+# desafioFazComex
+>>>>>>> 37576c9e598109066c7c06560e6aae8155a55dc1
