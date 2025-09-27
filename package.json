@@ -1,0 +1,35 @@
+{
+  "name": "desafiotecnico_fazcomex",
+  "version": "1.0.0",
+  "description": "Automação de testes end-to-end para a plataforma SimulaComex usando Cypress",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --browser chrome",
+    "cy:run:headed": "cypress run --headed --browser chrome",
+    "test": "npm run cy:run"
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "automation",
+    "testing",
+    "simulacomex",
+    "login"
+  ],
+  "author": "Felipe de Avila Roos <feliperoos98@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "cypress": "^15.3.0",
+    "cypress-xpath": "^2.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SEU_USUARIO/DesafioTecnico_fazComex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SEU_USUARIO/DesafioTecnico_fazComex/issues"
+  },
+  "homepage": "https://github.com/SEU_USUARIO/DesafioTecnico_fazComex#readme"
+}
